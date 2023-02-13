@@ -2,6 +2,15 @@ const Theatre = require("../schema/theatre");
 
 const addTheatre = async (req, res) => {
   try {
+    const theatreExist = await Theatre.findOne({
+      theatreName: req.body.theatreName,
+    });
+    if (theatreExist) {
+      return res.send({
+        success: false,
+        message: "Theatre already exist with this name",
+      });
+    }
     const theatreDetails = new Theatre(req.body);
     const data = await theatreDetails.save();
     return res.send({ success: true, message: "success", data: data });

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { addShow } = require("./showController");
+const { addShow } = require("../controllers/showController");
 
 router.post("/show", addShow);
 
